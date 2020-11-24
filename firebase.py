@@ -21,7 +21,7 @@ blob = bucket.blob(cloud_fileName + ".jpg")
 blob.upload_from_filename(local_file)
 
 #   get image url
-url = blob.public_url
+url = blob.self_link
 
 #   Data to be uploaded to firestore topic collection
 subject = input("Enter name of subject: ")

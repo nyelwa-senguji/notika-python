@@ -3,7 +3,7 @@ from firebase_admin import credentials, storage, firestore
 
 
 #   Credentials for accessing admin sdk for the application
-cred = credentials.Certificate('notika-firebase-adminsdk.json')
+cred = credentials.Certificate('/root/PycharmProjects/sdk/notika-firebase-adminsdk.json')
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'notika-e9b3a.appspot.com'
 })

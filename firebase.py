@@ -1,6 +1,8 @@
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
 
+# Import UUID4 to create token
+from uuid import uuid4
 
 #   Credentials for accessing admin sdk for the application
 cred = credentials.Certificate('/root/PycharmProjects/sdk/notika-firebase-adminsdk.json')
@@ -17,11 +19,23 @@ db = firestore.client()
 #   Upload a file to storage
 local_file = input("Enter name of file to be uploaded to storage: ")
 cloud_fileName = input("Enter name of the file in the bucket: ")
-blob = bucket.blob(cloud_fileName + ".jpg")
+blob = bucket.blob('topics/' + cloud_fileName + '.jpg')
 blob.upload_from_filename(local_file)
 
+#   create new token
+new_token  = uuid4()
+
+#   create new dictionary with metadata
+metadata = {"firebaseStorageDownloadTokens": new_token}
+
+#   set metadata to blob
+blob.metadata = metadata
+
+#   upload file
+blob.upload_from_filename(local_file, content_type='image/png')
+
 #   get image url
-url = blob.self_link
+url = blob.public_url
 
 #   Data to be uploaded to firestore topic collection
 subject = input("Enter name of subject: ")

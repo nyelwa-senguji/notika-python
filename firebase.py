@@ -23,7 +23,7 @@ blob = bucket.blob('topics/' + cloud_fileName + '.jpg')
 blob.upload_from_filename(local_file)
 
 #   create new token
-new_token  = uuid4()
+new_token = uuid4()
 
 #   create new dictionary with metadata
 metadata = {"firebaseStorageDownloadTokens": new_token}
@@ -35,6 +35,7 @@ blob.metadata = metadata
 blob.upload_from_filename(local_file, content_type='image/png')
 
 #   get image url
+blob.make_public()
 url = blob.public_url
 
 #   Data to be uploaded to firestore topic collection

@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
+from array import *
 
 # Import UUID4 to create token
 from uuid import uuid4
@@ -39,10 +40,19 @@ blob.make_public()
 url = blob.public_url
 
 #   Data to be uploaded to firestore topic collection
+class_name = input("Enter name of class to take the subject: ")
+level = input("A-level / O-level : ")
 subject = input("Enter name of subject: ")
 topic_name = input("Enter name of topic: ")
-level = input("A-level / O-level : ")
-class_name = input("Enter name of class to take the subject: ")
+
+#   An array for sub_topics
+arr = []
+n = int(input('Enter number of sub_topics: '))
+for i in range(0, n):
+    x = input('Enter name of sub_topic: ')
+    arr.append(x)
+sub_topics = arr
+
 
 #   uploading data to firestore
 doc_ref = db.collection('Topic')
@@ -51,5 +61,6 @@ doc_ref.add({
     'topic_name': topic_name,
     'level': level,
     'class_name': class_name,
-    'image': url
+    'image': url,
+    'sub_topics': sub_topics
 })

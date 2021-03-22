@@ -70,9 +70,12 @@ for i in range(0, n):
         'sub_topic_name': sub_topic_name
     })
 
+    sub_topic_id = sub_topic_ref.get()
+    ref_sub_topic_id = sub_topic_id.id
+
     #   Upload a pdf file to storage
     local_file = input("Enter name of pdf file to be uploaded to storage: ")
-    blob = bucket.blob('pdf/' + ref_id + '.pdf')
+    blob = bucket.blob('pdf/' + ref_sub_topic_id + '.pdf')
     blob.upload_from_filename(local_file)
 
     #   create new token
@@ -92,8 +95,6 @@ for i in range(0, n):
     pdf_url = blob.public_url
 
     #   sub_topic_pdf collection
-    sub_topic_id = sub_topic_ref.get()
-    ref_sub_topic_id = sub_topic_id.id
     sub_topic_pdf_ref = db.collection("Sub_Topic_Pdf").document()
     sub_topic_pdf_ref.set({
         'sub_topic_id': ref_sub_topic_id,

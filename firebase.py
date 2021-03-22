@@ -72,8 +72,7 @@ for i in range(0, n):
 
     #   Upload a pdf file to storage
     local_file = input("Enter name of pdf file to be uploaded to storage: ")
-    cloud_fileName = input("Enter name of the pdf file in the bucket: ")
-    blob = bucket.blob('pdf/' + cloud_fileName + '.pdf')
+    blob = bucket.blob('pdf/' + ref_id + '.pdf')
     blob.upload_from_filename(local_file)
 
     #   create new token

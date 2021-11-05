@@ -6,7 +6,7 @@ from array import *
 from uuid import uuid4
 
 #   Credentials for accessing admin sdk for the application
-cred = credentials.Certificate('/root/PycharmProjects/sdk/notika-firebase-adminsdk.json')
+cred = credentials.Certificate(<Path to admin sdk file>)
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'notika-a2c99.appspot.com'
 })
